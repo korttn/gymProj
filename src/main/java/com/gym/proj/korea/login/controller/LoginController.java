@@ -18,7 +18,7 @@ import com.gym.proj.korea.login.bean.Login;
 import com.gym.proj.korea.login.service.LoginService;
 
 @Controller
-@RequestMapping("/mes")
+@RequestMapping("/korea")
 public class LoginController extends CommonController {
 	
 	@Autowired
@@ -26,7 +26,7 @@ public class LoginController extends CommonController {
 	
 	@RequestMapping(value = {"/login/", "/login"}, method = RequestMethod.GET)
 	public String loginView() {
-		return "mes/login/login";
+		return "korea/login/login";
 	}
 	
 	@RequestMapping(value = {"/login/", "/login"}, method = RequestMethod.POST)
