@@ -3,7 +3,7 @@
 <mapper namespace="fileInfo">
 	
 	
-	<insert id="insertFileInfo" parameterType="com.siemens.gimpo.mes.common.file.bean.FileInfo">
+	<insert id="insertFileInfo" parameterType="com.gym.proj.korea.file.bean.FileInfo">
 		INSERT INTO com_file
 					(
 					file_no

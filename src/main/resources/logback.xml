@@ -46,8 +46,7 @@
 	 -->
 	
 	
-	<logger name="com.siemens.gimpo" level="info" />
-	<logger name="com.siemens.gimpo.common.ascpect" level="info" />
+	<logger name="com.gym.proj" level="info" />
 
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core" level="info" />
