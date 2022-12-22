@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>[%-5level][%X{RID}][%d{yyyy-MM-dd}][%d{HH:mm:ss.SSS}] %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<springProperty name="driverClass" source="jdbc.driverClassName"/>
+    <springProperty name="url" source="jdbc.url"/>
+    <springProperty name="user" source="jdbc.username"/>
+    <springProperty name="password" source="jdbc.password"/>
+
+	<!-- 
+	<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+		<connectionSource
+			class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+			<driverClass>${driverClass}</driverClass>
+			<url>${url}</url>
+			<user>${user}</user>
+			<password>${password}</password>
+		</connectionSource>
+	</appender>
+	 -->
+	
+	
+	<!-- 
+	<appender name="FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/logs/kaids/was/was.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/logs/kaids/was/was/%d{yyyyMM, aux}/api.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>200MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>1095</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>[%-5level][%X{RID}][%d{yyyy-MM-dd}][%d{HH:mm:ss.SSS}] %logger{36} - [%M] %msg%n</pattern>
+		</encoder>
+	</appender>
+	 -->
+	
+	
+	<logger name="com.siemens.gimpo" level="info" />
+	<logger name="com.siemens.gimpo.common.ascpect" level="info" />
+
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core" level="info" />
+
+	<logger name="org.springframework.beans" level="info" />
+
+	<logger name="org.springframework.context" level="info" />
+
+	<logger name="org.springframework.web" level="info" />
+
+	<logger name="org.springframework.scheduling.annotation" level="info" />
+
+	<!-- Root Logger -->
+	<root level="info">
+		<appender-ref ref="CONSOLE" />
+		
+	</root>
+	
+</configuration>

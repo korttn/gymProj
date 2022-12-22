@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.gym.proj" />
+	
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" id="viewResolver">
+		<beans:property name="order" value="0"> </beans:property>
+	</beans:bean>
+	
+	<!-- multipartResolver -->
+	<beans:bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+         <!-- 최대업로드 가능한 바이트크기 -->
+         <beans:property name="maxUploadSize" value="10240000" />
+         <!-- defaultEncoding -->
+         <beans:property name="defaultEncoding" value="utf-8" />
+	</beans:bean>
+	
+	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+   		<beans:property name="contentType" value="application/json;charset=UTF-8"> </beans:property>
+	</beans:bean>
+	
+	<!-- Json null 값 공백으로 치환 -->
+	<beans:bean id="objectMapper" class="com.gym.proj.common.util.CustomJSONObjectMapper" />
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<beans:property name="order" value="0"/>    
+	</beans:bean>   
+	
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	    <beans:property name="messageConverters">
+	     <beans:list>    
+	         <beans:bean class="org.springframework.http.converter.StringHttpMessageConverter">
+	             <beans:property name="supportedMediaTypes">
+	                 <beans:list>
+	                     <beans:value>text/html;charset=UTF-8</beans:value>
+	                     <beans:value>application/json;charset=UTF-8</beans:value>
+	                 </beans:list>
+	             </beans:property>
+	         </beans:bean>           
+	         <beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	         	<beans:property name="objectMapper" ref="objectMapper"></beans:property>  
+	         </beans:bean>
+	     </beans:list>
+	    </beans:property>                    
+	</beans:bean>
+	
+
+	<!-- interceptor bean object -->
+	<beans:bean id="LoginInterceptor" class="com.gym.proj.common.interceptor.LoginInterceptor"></beans:bean>
+	
+	<!-- Interceptor setting -->
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/korea/**"/>
+	        <exclude-mapping path="/korea/login/**" />        
+	        <beans:ref bean="LoginInterceptor"/>
+	    </interceptor>
+	</interceptors>
+	
+	
+</beans:beans>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="fileInfo">
+	
+	
+	<insert id="insertFileInfo" parameterType="com.siemens.gimpo.mes.common.file.bean.FileInfo">
+		INSERT INTO com_file
+					(
+					file_no
+					, file_att_cd
+					, file_nm
+					, file_ext
+					, file_ctx
+					, file_size
+					, file_save_mthd_cd
+					, file_save_path
+					, up_date
+					, remark
+					, c_by
+					, c_date
+					)
+		VALUES 		(
+					#{fileNo}
+					, #{fileAttCode}
+					, #{fileName}
+					, #{fileExtName}
+					, #{fileCtx}
+					, #{fileSize}
+					, #{fileSaveMthdCd}
+					, #{fileSavePath}
+					, TO_TIMESTAMP(#{fileUploadDate},'YYYY-MM-DD HH24:MI:SS')
+					, #{remark}
+					, #{regBy}
+					, TO_TIMESTAMP(#{regDate},'YYYY-MM-DD HH24:MI:SS')
+					) 
+	</insert>
+	
+	<delete id="deleteFileInfo" parameterType="String">
+		DELETE 
+		FROM com_file
+		WHERE file_no = #{fileNo}
+	</delete>
+	
+</mapper>
