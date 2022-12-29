@@ -4,12 +4,16 @@
 
 	<settings>
         <setting name="defaultStatementTimeout"	value="30" />	
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
 
 	<typeAliases>
 	    <typeAlias alias="param" type="com.gym.proj.common.bean.ParamMap"/>
 	    <typeAlias alias="result" type="com.gym.proj.common.bean.ResultMap"/>
 	    <typeAlias alias="user" type="com.gym.proj.korea.user.bean.User"/>
+	    <typeAlias alias="login" type="com.gym.proj.korea.login.bean.Login"/>
+	    
 	</typeAliases>
 
 </configuration>

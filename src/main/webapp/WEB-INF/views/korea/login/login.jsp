@@ -46,7 +46,7 @@
 			  <div class="form-group">
 			  <label for="exampleInputUsername" class="sr-only">Username</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="text" id="exampleInputUsername" class="form-control input-shadow" placeholder="Enter Username">
+				  <input type="text" id="userID" class="form-control input-shadow" placeholder="Enter UserID">
 				  <div class="form-control-position">
 					  <i class="icon-user"></i>
 				  </div>
@@ -55,7 +55,7 @@
 			  <div class="form-group">
 			  <label for="exampleInputPassword" class="sr-only">Password</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="password" id="exampleInputPassword" class="form-control input-shadow" placeholder="Enter Password">
+				  <input type="password" id="userPW" class="form-control input-shadow" placeholder="Enter Password">
 				  <div class="form-control-position">
 					  <i class="icon-lock"></i>
 				  </div>
@@ -72,7 +72,7 @@
 			  <a href="reset-password.html">Reset Password</a>
 			 </div>
 			</div>
-			 <button type="button" class="btn btn-light btn-block">Sign In</button>
+			 <button type="button" class="btn btn-light btn-block" onclick="login02()">Sign In</button>
 			  <div class="text-center mt-3">Sign In With</div>
 			  
 			 <div class="form-row mt-4">
@@ -89,6 +89,7 @@
 		  </div>
 		  <div class="card-footer text-center py-3">
 		    <p class="text-warning mb-0">Do not have an account? <a href="register.html"> Sign Up here</a></p>
+		    <button type="button" class="btn btn-light btn-block" onclick="CreateUserView()">회원가입</button>
 		  </div>
 	     </div>
     
@@ -146,6 +147,60 @@
   
   <!-- Custom scripts -->
   <script src="${path}/resources/js/app-script.js"></script>
+  
+  <!-- login function -->
+  <script type="text/javascript">
+  /* function login(){
+	var userId = $('#userId').val();
+	var userPw = $('#userPw').val();
+	var jsonData = {"userId" : userId, "userPw" : userPw};
+	$.ajax({
+		type : "POST",
+		url : "/korea/login",
+		data: JSON.stringify(jsonData),
+		contentType: "application/json; charset=utf-8",
+		success : function (data){
+			console.log(data);
+			if(data){
+				alert("로그인 성공");
+			} else {
+				alert("로그인 실패");
+			}
+		}
+		
+	});
+  } */
+  </script>
+  
+  <script>
+  function login02(){
+	  var userID = $('#userID').val();
+	  var userPW = $('#userPW').val();
+	  var jsonData = {"userID" : userID, "userPW" : userPW};
+	  console.log(userID);
+	  console.log(userPW);
+	  $.ajax({
+		 type : "POST",
+		 url : "/korea/login",
+		 data : JSON.stringify(jsonData),
+		 contentType : "application/json; charset=utf-8",
+		 success : function(data){
+			 console.log(data);
+			 if(data){
+				 alert("로그인 성공");
+			 } else {
+				 alert("로그인 실패");
+			 }
+			 
+		 }
+	  });
+  }
+  
+  function CreateUserView(){
+	  location.href = "/korea/user/add";
+  }
+  
+  </script>
   
 </body>
 </html>

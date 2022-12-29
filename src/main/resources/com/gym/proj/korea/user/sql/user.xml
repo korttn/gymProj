@@ -2,90 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="user">
 	
-	
-	<insert id="insertUser" parameterType="user">
-		INSERT INTO com_user
+	<insert id="newUser" parameterType="user">
+		INSERT INTO new_user
 					(
-					user_id
-					, user_nm
-					, org_cd
-					, user_pwd
-					, file_no
-					, remark
-					, cust_01
-					, cust_02
-					, cust_03
-					, cust_04
-					, cust_05
-					, use_yn
-					, c_by
-					, c_date
+					userId
+					, userEmail
+					, userPassword
+					, userName
+					, userGender
+					, phoneNumber
+					, postCode
+					, address
+					, detailAddress
+					, extraAddress
 					)
 		VALUES 		(
 					#{userId}
-					, #{userName}
-					, #{orgCode}
+					, #{userEmail}
 					, #{userPassword}
-					, #{fileNo}
-					, #{remark}
-					, #{cust01}
-					, #{cust02}
-					, #{cust03}
-					, #{cust04}
-					, #{cust05}
-					, #{useYn}
-					, #{regBy}
-					, TO_TIMESTAMP(#{regDate},'YYYY-MM-DD HH24:MI:SS')
-					) 
+					, #{userName}
+					, #{userGender}
+					, #{phoneNumber}
+					, #{postCode}
+					, #{address}
+					, #{detailAddress}
+					, #{extraAddress}
+					)
 	</insert>
 	
-	<select id="getUser" parameterType="String" resultType="user">
-		SELECT	user_id AS userId
-				, user_nm AS userName
-				, org_cd AS orgCode
-				, user_pwd AS userPassword
-				, file_no AS fileNo
-				, remark AS remark
-				, cust_01 AS cust01
-				, cust_02 AS cust02
-				, cust_03 AS cust03
-				, cust_04 AS cust04
-				, cust_05 AS cust05
-				, use_yn AS useYn
-				, c_by AS regBy
-				, to_char(c_date, 'YYYY-MM-DD HH24:MI:SS') AS regDate
-				, u_by AS updateBy
-				, to_char(u_date, 'YYYY-MM-DD HH24:MI:SS') AS updateDate
-		FROM	com_user 
-		WHERE	user_id = #{userId}
-	</select>
-	
+	<!-- 테이블 명 상시 확인 할것! -->
 	<select id="idCheck" parameterType="String" resultType="int">
 		SELECT	COUNT(*)
-		FROM	com_user 
-		WHERE	user_id = #{userId}
-	</select>
-	
-	<select id="checkUser" parameterType="com.gym.proj.korea.login.bean.Login" resultType="user">
-		SELECT	user_id AS userId
-				, user_nm AS userName
-				, org_cd AS orgCode
-				, user_pwd AS userPassword
-				, file_no AS fileNo
-				, remark AS remark
-				, cust_01 AS cust01
-				, cust_02 AS cust02
-				, cust_03 AS cust03
-				, cust_04 AS cust04
-				, cust_05 AS cust05
-				, use_yn AS useYn
-				, c_by AS regBy
-				, to_char(c_date, 'YYYY-MM-DD HH24:MI:SS') AS regDate
-				, u_by AS updateBy
-				, to_char(u_date, 'YYYY-MM-DD HH24:MI:SS') AS updateDate
-		FROM	com_user 
-		WHERE	user_id = #{id}
-		AND		user_pwd = #{password}
+		FROM	new_user
+		WHERE	userId = #{userId}
 	</select>
 	
 	<select id="getUserList" resultType="user">

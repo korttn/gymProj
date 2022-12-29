@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 					// 파일 등록 NO 확인 후 user에 셋팅
 					logger.debug("file create");
 					if (!CommonUtil.isNull(result.get("fileNo"))) {
-						user.setFileNo((String)result.get("fileNo"));
+//						user.setFileNo((String)result.get("fileNo"));
 					}
 				}
 				// user 등록
@@ -82,4 +82,51 @@ public class UserServiceImpl implements UserService {
 		return dao.getUserList();
 	}
 
+	@Override
+	public ResultMap createUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMap newUser(User user) {
+		ResultMap result = new ResultMap();
+		TransactionStatus transactionStatus = transactionManager.getTransaction(new DefaultTransactionDefinition());
+		try {
+			// 기존 ID 유무 확인
+			logger.debug("id check");
+			if (dao.idCheck(user.getUserId()) <= 0) {
+				// user 등록
+				logger.debug("user create");
+				user.setRegBy(user.getUserId());
+				user.setRegDate(DateUtil.getCurrentDateToKorea());
+				dao.newUser(user);
+				transactionManager.commit(transactionStatus);
+			} else {
+				throw new LogicException("605", "사용중인 ID 입니다.");
+			}
+		} catch (Exception e) {
+			transactionManager.rollback(transactionStatus);
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+
+	@Override
+	public ResultMap checkId(User user) {
+		ResultMap result = new ResultMap();
+		//select 문에서는 트랜잭션을 사용하지 않는다.
+		
+		//시스템 로그
+		logger.debug("id check");
+
+		// 기존 ID 유무 확인
+		if (dao.idCheck(user.getUserId()) <= 0) {
+			result.setMsg("사용할 수 있는 ID 입니다.");
+		} else {
+			result.setMsg("중복된 ID 입니다.");
+		}
+		return result;
+	}
+	
 }

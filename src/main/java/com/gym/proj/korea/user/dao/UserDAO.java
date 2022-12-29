@@ -11,8 +11,12 @@ import com.gym.proj.korea.user.bean.User;
 @Repository
 public class UserDAO extends CommonDAO {
 
-	public int insertUser(User uesr) {
-		return insert("user.insertUser", uesr);
+	public int insertUser(User user) {
+		return insert("user.insertUser", user);
+	}
+	
+	public int newUser(User user) {
+		return insert("user.newUser", user);
 	}
 	
 	public User getUser(String id) {

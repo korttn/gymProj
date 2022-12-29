@@ -32,8 +32,7 @@ public class LoginController extends CommonController {
 	@RequestMapping(value = {"/login/", "/login"}, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultMap login(@RequestBody Login login, HttpServletResponse response ) {
-		
-		return null;
+		return service.login(login);
 	}
 	
 	@RequestMapping(value = "/login/test", method = RequestMethod.GET)
