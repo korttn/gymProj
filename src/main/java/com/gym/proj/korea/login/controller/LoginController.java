@@ -29,6 +29,11 @@ public class LoginController extends CommonController {
 		return "korea/login/login";
 	}
 	
+	@RequestMapping(value = {"/index/", "/index"}, method = RequestMethod.GET)
+	public String IndexView() {
+		return "korea/index/index";
+	}
+	
 	@RequestMapping(value = {"/login/", "/login"}, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultMap login(@RequestBody Login login, HttpServletResponse response ) {

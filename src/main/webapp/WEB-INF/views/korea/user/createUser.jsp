@@ -348,6 +348,7 @@ function newUser(){
 			console.log(data);
 			if(data){
 				alert("회원가입 성공");
+				location.href="/korea/login/";
 			} else {
 				alert("회원가입 실패");
 			}

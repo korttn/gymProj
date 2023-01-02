@@ -46,7 +46,7 @@
 			  <div class="form-group">
 			  <label for="exampleInputUsername" class="sr-only">Username</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="text" id="userID" class="form-control input-shadow" placeholder="Enter UserID">
+				  <input type="text" id="userId" class="form-control input-shadow" placeholder="Enter UserID">
 				  <div class="form-control-position">
 					  <i class="icon-user"></i>
 				  </div>
@@ -55,7 +55,7 @@
 			  <div class="form-group">
 			  <label for="exampleInputPassword" class="sr-only">Password</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="password" id="userPW" class="form-control input-shadow" placeholder="Enter Password">
+				  <input type="password" id="userPassword" class="form-control input-shadow" placeholder="Enter Password">
 				  <div class="form-control-position">
 					  <i class="icon-lock"></i>
 				  </div>
@@ -174,25 +174,31 @@
   
   <script>
   function login02(){
-	  var userID = $('#userID').val();
-	  var userPW = $('#userPW').val();
-	  var jsonData = {"userID" : userID, "userPW" : userPW};
-	  console.log(userID);
-	  console.log(userPW);
+	  var userId = $('#userId').val();
+	  var userPassword = $('#userPassword').val();
+	  var jsonData = {"userId" : userId, "userPassword" : userPassword};
+	  
+	  console.log(userId);
+	  console.log(userPassword);
+	  
 	  $.ajax({
 		 type : "POST",
 		 url : "/korea/login",
 		 data : JSON.stringify(jsonData),
 		 contentType : "application/json; charset=utf-8",
 		 success : function(data){
+			 
 			 console.log(data);
-			 if(data){
-				 alert("로그인 성공");
+			 
+			 if(userId === data.userId){
+				 alert(data.userId + "님 어서오세요~");
+				 location.href="/korea/index"
 			 } else {
-				 alert("로그인 실패");
+				 alert("ID 또는 Password 를 잘못입력하셨습니다.");
 			 }
 			 
 		 }
+		 
 	  });
   }
   

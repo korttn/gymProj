@@ -5,8 +5,10 @@ import lombok.Data;
 @Data
 public class Login {
 
-	private String userID;
-	private String userPW;
+	private String userId;
+	private String userPassword;
 	private String newPassword;
 	private String email;
+	
+	
 }

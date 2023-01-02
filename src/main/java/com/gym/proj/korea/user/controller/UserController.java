@@ -44,14 +44,14 @@ public class UserController extends CommonController {
 		return service.checkId(user);
 	}
 	
-	@RequestMapping(value = {"/", ""}, method=RequestMethod.POST)
+/*	@RequestMapping(value = {"/", ""}, method=RequestMethod.POST)
 	public ResultMap createUser(@RequestParam("file") MultipartFile file, @RequestParam("id") String id
 								, @RequestParam("password") String password, @RequestParam("name") String name
 								, @RequestParam("auth") String authCode, @RequestParam("useYn") String useYn) throws Exception {
 		User user = new User(id, password, name, authCode, useYn);
 		
 		return service.createUser(user, file);
-	}
+	} */
 	
 	@RequestMapping(value = {"/test/", "/test"}, method=RequestMethod.POST)
 	public ResultMap createUserBody() {
